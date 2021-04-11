@@ -41,7 +41,7 @@
 /*!
  * This warning indicates that the TCM chip is too warm to operate and has shut down to prevent damage. 
  * It will stop working until it cools down again.
- * If you encouter this situation you must do something against it. Like reducing the current or improving the PCB layout 
+ * If you encounter this situation you must do something against it. Like reducing the current or improving the PCB layout
  * and/or heat management.
  */
 #define TMC26X_OVERTEMPERATURE_SHUTDOWN 2
@@ -96,21 +96,21 @@
  * To really move the motor you have to call step() to tell the driver to move the motor the given number 
  * of steps in the given direction. Positive values move the motor in one direction, negative values in the other direction.
  *
- * You can check with isMoving() if the mototr is still moving or stop it  apruptely with stop().
+ * You can check with isMoving() if the motor is still moving or stop it  abruptly with stop().
  */
 class TMC26XStepper {
   public:
     /*!
-     * \brief creates a new represenatation of a stepper motor connected to a TMC26X stepper driver
+     * \brief creates a new representation of a stepper motor connected to a TMC26X stepper driver
      *
      * This is the main constructor. If in doubt use this. You must provide all parameters as described below.
      *
      * \param number_of_steps the number of steps the motor has per rotation.
-     * \param cs_pin The Arduino pin you have connected the Cient Select Pin (!CS) of the TMC26X for SPI
+     * \param cs_pin The Arduino pin you have connected the Client Select Pin (!CS) of the TMC26X for SPI
      * \param dir_pin the number of the Arduino pin the Direction input of the TMC26X is connected
      * \param step_pin the number of the Arduino pin the step pin of the TMC26X driver is connected.
-     * \param rms_current the maximum current to privide to the motor in mA (!). A value of 200 would send up to 200mA to the motor
-     * \param resistor the current sense resistor in milli Ohm, defaults to ,15 Ohm ( or 150 milli Ohm) as in the TMC260 Arduino Shield
+     * \param rms_current the maximum current to provide to the motor in mA (!). A value of 200 would send up to 200mA to the motor
+     * \param resistor the current sense resistor in milliOhm, defaults to ,15 Ohm ( or 150 milliOhm) as in the TMC260 Arduino Shield
      *
      * Keep in mind that you must also call TMC26XStepper.start() in order to configure the stepper driver for use.
      *
@@ -137,7 +137,7 @@ class TMC26XStepper {
      *
      * This routine enables you to call start again. It does not change anything 
      * in the internal stepper configuration or the desired configuration.
-     * It just marks the stepper as not yet startet. You do not have to reconfigure
+     * It just marks the stepper as not yet started. You do not have to reconfigure
      * the stepper to start it again, but it is not reset to any factory settings
      * this has to be configured back by yourself.
      * (Hint: Normally you do not need this function)
@@ -171,7 +171,7 @@ class TMC26XStepper {
      * \brief returns the effective current number of microsteps selected.
      *
      * This function always returns the effective number of microsteps. 
-     * This can be a bit different than the micro steps set in setMicrosteps() since it is rounded to 2^i.
+     * This can be a bit different than the microsteps set in setMicrosteps() since it is rounded to 2^i.
      *
      * \sa setMicrosteps()
      */
@@ -201,14 +201,14 @@ class TMC26XStepper {
      * and manages the number of steps yet to move to fulfill the current move command.
      *
      * This function is implemented to be as fast as possible to call it as often as possible in your loop routine.
-     * The more regurlarly you call this function the better. In both senses of 'regularly': Calling it as often as
+     * The more regularly you call this function the better. In both senses of 'regularly': Calling it as often as
      * possible is not a bad idea and if you even manage that the intervals you call this function are not too irregular helps too.
      *
      * You can call this routine even if you know that the motor is not miving. It introduces just a very small penalty in your code.
-     * You must not call isMoving() to determine if you need to call this function, since taht is done internally already and only 
+     * You must not call isMoving() to determine if you need to call this function, since that is done internally already and only
      * slows down you code.
      * 
-     * How often you call this function directly influences your top miving speed for the motor. It may be a good idea to call this
+     * How often you call this function directly influences your top moving speed for the motor. It may be a good idea to call this
      * from an timer overflow interrupt to ensure proper calling.
      * \sa step()
      */
@@ -373,14 +373,14 @@ class TMC26XStepper {
      * \param enabled true if CoolStep should be enabled, false if not.
      * \sa setCoolStepConfiguration()
      */
-    void setCoolStepEnabled(boolean enabled);
+    void setCoolStepEnabled(bool enabled);
     
     
     /*!
      * \brief check if the CoolStep feature is enabled
      * \sa setCoolStepEnabled()
      */
-    boolean isCoolStepEnabled();
+    bool isCoolStepEnabled();
 
     /*!
      * \brief returns the lower StallGuard threshold for the CoolStep operation
@@ -441,7 +441,7 @@ class TMC26XStepper {
      *\brief a convenience method to determine if the current scaling uses 0.31V or 0.165V as reference.
      *\return false if 0.13V is the reference voltage, true if 0.165V is used.
      */
-    boolean isCurrentScalingHalfed();
+    bool isCurrentScalingHalfed();
 
     /*!
      * \brief Reads the current current setting value and recalculates the absolute current in mA (1A would be 1000).
@@ -460,7 +460,7 @@ class TMC26XStepper {
      *
      * \sa setStallGuardThreshold() for tuning the readout to sensible ranges.
      */
-	boolean isStallGuardOverThreshold(void);
+	bool isStallGuardOverThreshold(void);
     
     /*!
      * \brief Return over temperature status of the last status readout
@@ -477,7 +477,7 @@ class TMC26XStepper {
      * You may want to use getMotorPosition() or getCurrentStallGuardReading() to enforce an updated status readout.
      */
      
-	boolean isShortToGroundA(void);
+	bool isShortToGroundA(void);
 
     /*!
      * \brief Is motor channel B shorted to ground detected in the last status readout.
@@ -485,14 +485,14 @@ class TMC26XStepper {
      * Keep in mind that this method does not enforce a readout but uses the value of the last status readout.
      * You may want to use getMotorPosition() or getCurrentStallGuardReading() to enforce an updated status readout.
      */
-	boolean isShortToGroundB(void);
+	bool isShortToGroundB(void);
 	/*!
      * \brief iIs motor channel A connected according to the last statu readout.
      * \return true is yes, false if not.
      * Keep in mind that this method does not enforce a readout but uses the value of the last status readout.
      * You may want to use getMotorPosition() or getCurrentStallGuardReading() to enforce an updated status readout.
      */
-	boolean isOpenLoadA(void);
+	bool isOpenLoadA(void);
 
 	/*!
      * \brief iIs motor channel A connected according to the last statu readout.
@@ -500,7 +500,7 @@ class TMC26XStepper {
      * Keep in mind that this method does not enforce a readout but uses the value of the last status readout.
      * You may want to use getMotorPosition() or getCurrentStallGuardReading() to enforce an updated status readout.
      */
-	boolean isOpenLoadB(void);
+	bool isOpenLoadB(void);
     
     /*!
      * \brief Is chopper inactive since 2^20 clock cycles - defaults to ~0,08s
@@ -508,7 +508,7 @@ class TMC26XStepper {
      * Keep in mind that this method does not enforce a readout but uses the value of the last status readout.
      * You may want to use getMotorPosition() or getCurrentStallGuardReading() to enforce an updated status readout.
      */
-	boolean isStandStill(void);
+	bool isStandStill(void);
 
     /*!
      * \brief checks if there is a StallGuard warning in the last status
@@ -521,20 +521,20 @@ class TMC26XStepper {
      *
      * \sa setStallGuardThreshold() for tuning the readout to sensible ranges.
      */
-	boolean isStallGuardReached(void);
+	bool isStallGuardReached(void);
     
     /*!
      *\brief enables or disables the motor driver bridges. If disabled the motor can run freely. If enabled not.
-     *\param enabled a boolean value true if the motor should be enabled, false otherwise.
+     *\param enabled a bool value true if the motor should be enabled, false otherwise.
      */
-    void setEnabled(boolean enabled);
+    void setEnabled(bool enabled);
     
     /*!
      *\brief checks if the output bridges are enabled. If the bridges are not enabled the motor can run freely
      *\return true if the bridges and by that the motor driver are enabled, false if not.
      *\sa setEnabled()
      */
-    boolean isEnabled();
+    bool isEnabled();
 
 	/*!
      * \brief Manually read out the status register
@@ -593,13 +593,13 @@ class TMC26XStepper {
 	unsigned char dir_pin;
 	
 	//status values 
-	boolean started; //if the stepper has been started yet
+	bool started; //if the stepper has been started yet
 	int microsteps; //the current number of micro steps
     char constant_off_time; //we need to remember this value in order to enable and disable the motor
     unsigned char cool_step_lower_threshold; // we need to remember the threshold to enable and disable the CoolStep feature
-    boolean cool_step_enabled; //we need to remember this to configure the coolstep if it si enabled
+    bool cool_step_enabled; //we need to remember this to configure the coolstep if it si enabled
 	
-    uint32_t spi_speed = 16000000/8;
+    unsigned char spi_speed = 16000000/8;
 
 	//SPI sender
 	inline void send262(unsigned long datagram);
