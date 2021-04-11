@@ -4,6 +4,8 @@
 #eclipse stuff
 .classpath
 .project
+.cproject
+.settings/*
 
 #processing stuff 
 generated/
