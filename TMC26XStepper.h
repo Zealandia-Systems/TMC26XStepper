@@ -36,7 +36,7 @@
  * It is still working but some parameters may be inferior. 
  * You should do something against it.
  */
-#define TMC26X_OVERTEMPERATURE_PREWARING 1
+#define TMC26X_OVERTEMPERATURE_PREWARNING 1
 //! return value for TMC26XStepper.getOverTemperature() if there is a overtemperature shutdown in the TMC chip
 /*!
  * This warning indicates that the TCM chip is too warm to operate and has shut down to prevent damage. 

@@ -175,13 +175,6 @@ void TMC26XStepper::start() {
 	digitalWrite(dir_pin, LOW);     
 	digitalWrite(cs_pin, HIGH);   
 	
-	//configure the SPI interface
-    SPI.setBitOrder(MSBFIRST);
-	SPI.setClockDivider(SPI_CLOCK_DIV8);
-	//todo this does not work reliably - find a way to foolprof set it (e.g. while communicating
-	//SPI.setDataMode(SPI_MODE3);
-	SPI.begin();
-		
 	//set the initial values
 	send262(driver_control_register_value); 
 	send262(chopper_config_register);
@@ -902,7 +895,7 @@ int TMC26XStepper::version(void)
 void TMC26XStepper::debugLastStatus() {
 #ifdef DEBUG    
 if (this->started) {
-		if (this->getOverTemperature()&TMC26X_OVERTEMPERATURE_PREWARING) {
+		if (this->getOverTemperature()&TMC26X_OVERTEMPERATURE_PREWARNING) {
 			Serial.println("WARNING: Overtemperature Prewarning!");
 		} else if (this->getOverTemperature()&TMC26X_OVERTEMPERATURE_SHUTDOWN) {
 			Serial.println("ERROR: Overtemperature Shutdown!");
