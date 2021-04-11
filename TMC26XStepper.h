@@ -599,7 +599,7 @@ class TMC26XStepper {
     unsigned char cool_step_lower_threshold; // we need to remember the threshold to enable and disable the CoolStep feature
     bool cool_step_enabled; //we need to remember this to configure the coolstep if it si enabled
 	
-    unsigned char spi_speed = 16000000/8;
+    unsigned int spi_speed = 16000000/8;
 
 	//SPI sender
 	inline void send262(unsigned long datagram);

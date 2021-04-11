@@ -814,7 +814,7 @@ char TMC26XStepper::getOverTemperature(void) {
 		return TMC26X_OVERTEMPERATURE_SHUTDOWN;
 	}
 	if (driver_status_result & STATUS_OVER_TEMPERATURE_WARNING) {
-		return TMC26X_OVERTEMPERATURE_PREWARING;
+		return TMC26X_OVERTEMPERATURE_PREWARNING;
 	}
 	return 0;
 }
